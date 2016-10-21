@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-css 三个主要功能:
+<!-- css 三个主要功能: -->
 <!-- 1,布局,
 2,美化页面,
 3,与js,jq构成视觉效果 -->
 
 <!-- 布局的主要知识点
 1,盒模型 box model/margin/padding
-2,display:三个值
+2,display:四个值
     block: 独占一行
     inline: 和别人挤成一行,不能设置盒模式
     inline-block: 和别人挤在一行,可以设置和模型
+    flex:让盒子里面都有相同的长度
 3,position:有四个决定位置的值
     static:静态,流内,位子是浏览器匹配
     relative:对于静态而言,相对偏移,可以制作偏移的效果
@@ -20,6 +21,34 @@ css 三个主要功能:
         <meta charset="utf-8">
         <title></title>
         <style media="screen">
+        div {
+            outline: 1px dashed red;
+        }
+        .flex{
+            display: flex;
+        }
+        .flex1{
+            flex-grow: 1
+        }
+        .flex2{
+            flex-grow: 2
+        }
+        .flex3{
+            flex-grow: 3
+        }
+        .inline{
+            display:inline;
+        }
+        .inline-block{
+            position: relative;
+            top: 50px;
+            left: 50px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: red;
+        }
+
 
         </style>
     </head>
@@ -34,5 +63,18 @@ css 三个主要功能:
         <div class="inline">
             inline
         </div>
+        <div class="flex">
+            <div class="flex1">
+                按1分配
+            </div>
+            <div class="flex2">
+                按2分配
+            </div>
+            <div class="flex3">
+                按3分配
+            </div>
+
+        </div>
+
     </body>
 </html>
