@@ -82,6 +82,25 @@
             left:0;
             background: yellow;
         }
+        .absolute2{
+            position: absolute;
+            background: green;
+            top: 50%;
+            width:200px;
+            height: 200px;
+            z-index: -1;
+            visibility: visible;
+                overflow: auto;
+        }
+        .absolute1{
+            position: absolute;
+            background: green;
+            top: 50%;
+            width:200px;
+            height: 200px;
+            z-index: -1;
+                overflow: auto;
+        }
 
 
         </style>
@@ -124,16 +143,15 @@
                     absolute
                 </div>
                 <div class="fixed">
-
                     <button type="button" name="button">fixed</button>
                 </div>
         </div>
 
 
         </div>
-        <div class="absolute">
+        <div class="absolute1">
             框一
-            <div class="absolute">
+            <div class="absolute2">
                  框二
 
             </div>
