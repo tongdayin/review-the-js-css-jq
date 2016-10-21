@@ -15,7 +15,7 @@
     static:静态,流内,位子是浏览器匹配
     relative:对于静态而言,相对偏移,可以制作偏移的效果
     absolute:对于上面两者而言,脱离流,选择与相同absolute属性的父元素相对
-    fixed:脱离流,至于浏览器窗口有关,跟absolute有index的关系,需要注意 -->
+    fixed:脱离流,至于浏览器窗口有关,跟absolute有z-index的关系,需要注意 -->
 <html>
     <head>
         <meta charset="utf-8">
@@ -49,6 +49,39 @@
         .block{
             display:block;
         }
+        .holder{
+            display:inline-block;
+            width:200px;
+            height: 200px;
+        }
+        .position{
+            display:inline-block;
+
+            width:200px;
+            height: 200px;
+        }
+        .static{
+            background: yellow;
+        }
+        .relative{
+            position: relative;
+            background: blue;
+            top: 20px;
+
+            left: 20px;
+        }
+        .absolute{
+            position: absolute;
+            background: green;
+            top: 20px;
+            z-index: -1;
+        }
+        .fixed{
+            position: fixed;
+            top: 20px;
+            left:0;
+            background: yellow;
+        }
 
 
         </style>
@@ -75,8 +108,38 @@
             <div class="flex3">
                 按3分配
             </div>
+        </div>
+        <div class="flex">
+            <div class="holder">
+                holder
+            </div>
+            <div class="position">
+                <div class="static">
+                    static
+                </div>
+                <div class="relative">
+                    relative
+                </div>
+                <div class="absolute">
+                    absolute
+                </div>
+                <div class="fixed">
+
+                    <button type="button" name="button">fixed</button>
+                </div>
+        </div>
+
 
         </div>
+        <div class="absolute">
+            框一
+            <div class="absolute">
+                 框二
+
+            </div>
+        </div>
+
+
 
     </body>
 </html>
