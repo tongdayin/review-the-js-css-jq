@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<!-- <img><br><input type="button" name="name" value="标签一般成对出现,但是有六种特殊的便签属于单标签">
+<param name="foo" value="bar">
+<meta name="name" content="content">
+<link rel="stylesheet" href="/css/master.css" media="screen" title="no title"> -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- meta 这一句是指定文件的编码
+        通过 charset 属性指定了编码为 utf-8 -->
+        <meta name="x-ua-compatible" content="ie=edeg">
+        <!-- 第二个是用最新版 chrome 或者 ie 渲染 -->
+        <meta name="viewport" content="width=device-width, initial-scal=1">
+        <!-- 第三个是适配移动端 -->
+        <meta name="description" content="content">
+        <!-- 第四个是 描述 -->
+        <meta name="author" content="content">
+        <!-- 第五个是作者 -->
+        <title>网页的标题,在浏览器显示</title>
+        <style media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        table{
+            position: absolute;
+            top: 30%;
+            left:40%;
+            transform: translateX(-30%);
+            z-index: 1;
+
+            align-items: center;
+            width: 500px;
+            margin: 0   auto;
+            border: 1px solid red ;
+        }
+        tr{
+            border: 1px solid blue ;
+
+        }
+        th{
+            text-align: center;
+            border: 1px solid blue ;
+        }
+        td{
+            text-align: center;
+            border: 1px solid green ;
+        }
+        </style>
+    </head>
+    <body>
+        <base href="http://www.baidu.com" target="_blank" />
+        <a href="/"><img  src="http://img.hb.aicdn.com/8629e1c0b64bbfca354cb670060e23c5426c0ba0e664e-qDbW1g_fw658" alt="" /></a>
+        <table>
+            <caption>个人信息</caption>
+            <form class="" action="index.html" method="post">
+                <tr>
+                    <th>
+                        姓名
+                    </th>
+                    <td>
+                        <input type="password" name="name" value="">
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        性别
+                    </th>
+                    <td>
+                        <input type="radio" name="name" value="1" checked>男
+                        <input type="radio" name="name" value="2">女
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>
+                        学历
+                    </th>
+                    <td>
+                        <select class="" name="">
+                            <option value="option">---选择---</option>
+                            <option value="option">本科</option>ha
+                            <option value="option">肄业</option>
+                            <option value="option">科研</option>
+                            <option value="option">神</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>
+                        状态
+                    </th>
+                    <td>
+                        <input type="checkbox" name="name" value="">
+                        <input type="checkbox" name="name" value="">
+                        <input type="checkbox" name="name" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        自我评价
+                    </th>
+                    <td>
+
+                        <input type="textarea" rows="4" name="name" value="">
+
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2" aligin="center">
+                        <input type="submit" name="name" value="">
+                        <input type="reset" name="name" value="">
+                    </th>
+                </tr>
+            </form>
+        </table>
+
+
+
+    </body>
+</html>
