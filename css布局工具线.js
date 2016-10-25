@@ -27,7 +27,7 @@ var ckXian = function () {
     </style>
     `
 
-    i = false
+    var i = false
     body.addEventListener('keydown', function(event){
         if (event.keyCode === 77 && event.ctrlKey) {
             if (i) {

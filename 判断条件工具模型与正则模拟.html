@@ -79,6 +79,252 @@
 
     })
 
+    //发现字符
+    var find = function(s1, s2) {
+        /*
+        s1 s2 都是 string
+        但 s2 的长度是 1
+
+        返回 s2 在 s1 中的下标, 从 0 开始, 如果不存在则返回 -1
+        */
+        var len = s1.length
+        if(s1.includes(s2)) {
+            for (var i = 0; i < len; i++) {
+                var str = s1[i]
+                if (str == s2) {
+                    //log("i 的值:",i)
+                    return i
+                }
+            }
+        }
+        //log(-1)
+        return -1
+    }
+    //字符大小转换(全不同一大小写)
+    var lower = 'abcdefghijklmnopqrstuvwxyz'
+    var upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    var lowercase = function(s) {
+        // 初始化一个空字符串
+        var result = ""
+        for (var i = 0; i < s.length; i++) {
+            // 注意, 这个 find 是你要实现的函数
+            var index = find(upper, s[i])
+            // 字符串可以用加号拼接, 不明白可以 log 一下
+            result += lower[index]
+        }
+        return result
+    }
+    var uppercase = function(s) {
+        var result = ""
+        for (var i = 0; i < s.length; i++) {
+            var index = find(lower,s[i])
+            result += upper[index]
+        }
+        //log(result)
+        return result
+    }
+    //字符大小转换(不同大小写)
+    var lowercase1 = function(s) {
+        var result = ""
+        var len = s.length
+        for (var i = 0; i < len; i++) {
+            if (upper.includes(s[i])) {
+                var index = find(upper,s[i])
+                result += lower[index]
+                //log(result)
+            }else {
+                result += s[i]
+                //log(result)
+            }
+        }
+        return result
+    }
+    var uppercase1 = function(s) {
+        var result = ""
+        var len = s.length
+        for (var i = 0; i < len; i++) {
+            if (lower.includes(s[i])) {
+                var index = find(lower,s[i])
+                result += upper[index]
+                log(result)
+            }else {
+                result += s[i]
+                log(result)
+            }
+        }
+        return result
+    }
+    //凯撒字符加密
+    var encode2 = function(s, shift) {
+        var result = ""
+        var len = s.length
+        for (var i = 0; i < len; i++) {
+            var sl = s[i]
+            var index = find(lower,s[i])
+            if (index + shift >= 26) {
+                result += lower[index + shift - 26]
+            }else {
+                result += lower[index + shift]
+            }
+        }
+        return result
+    }
+    //字符内包含非字母
+    var encode3 = function(s, shift) {
+        var str = lowercase1(s)
+        var result = ""
+        var len = s.length
+        for (var i = 0; i < len; i++) {
+            if (lower.includes(str[i])) {
+                result += encode2(str[i],shift)
+            }
+            else {
+                result += str[i]
+            }
+        }
+        return result
+    }
+    //凯撒字符解密
+    var decode2 = function(s, shift) {
+        var result = ""
+        var len = s.length
+        for (var i = 0; i < len; i++) {
+            var sl = s[i]
+            var index = find(lower,s[i])
+            if (index - shift < 0) {
+                result += lower[index - shift + 26]
+            }else {
+                result += lower[index - shift]
+            }
+        }
+        return result
+    }
+    var decode3 = function(s, shift) {
+        var str = lowercase1(s)
+        var result = ""
+        var len = str.length
+        for (var i = 0; i < len; i++) {
+            if (lower.includes(str[i])) {
+                result += decode2(str[i],shift)
+            }
+            else {
+                result += str[i]
+            }
+        }
+        return result
+    }
+    //根据字符匹配度的评分
+    var rank = function(wordList) {
+        var score = 0
+        for (var i = 0; i < wordList.length; i++) {
+            var word = wordList[i]
+            if(words.includes(word)) {
+                score++
+                //当这个word在词典里面就加分
+            }
+        }
+        var r = score / wordList.length * 100
+        r = Math.floor(r)
+        log(`比率是 ${r}%`)
+        return score
+    }
+    var decode4 = function(s) {
+        for (var i = 1; i < lower.length; i++) {
+            var result = decode3(s,i)
+            // log(result)
+            var wordList = result.split(' ')
+            var score = rank(wordList)
+            // log('score ', score)
+            if(score > 10) {
+                log(result)
+            }
+        }
+    }
+    log(typeof(1))
+    typeof(1)
+    "number"
+    typeof('1')
+    "string"
+    typeof(true)
+    "boolean"
+    var t = function(){}
+    undefined
+    typeof(t)
+    "function"
+    var t = [1,2]
+    undefined
+    typeof(t)
+    "object"
+    null , undefined
+    // 在json是不一样的,最好先用标记undefined为某个特殊组合来解决
+    log('type a', typeof a)
+    turtleMain.js:2 ["type a", "undefined"]
+    //  使用反引号, 键盘左上角波浪线
+    var a = `多
+    行
+    字符串
+    `
+    log('多行字符串', a)
+    // 在代码中表示字符串的时候, 很多东西不方便表示, 因此我们使用转义符的方式来表示
+    // 转义符是字符串中的特殊符号，由反斜杠（backslash）开始，接另一个字符
+    // \n     // 表示一个换行符
+    // \t     // 表示一个 TAB（制表符）
+    // \\     // 表示一个反斜杠 \
+    // \'     // 表示一个单引号
+    // \"     // 表示一个双引号
+
+    // 高阶函数这个名字很唬人, 实际上概念很简单——函数可以作为参数传递
+    //
+    // 有什么用呢？灵活性高，舒适度佳
+    // 请看例子
+    //
+    // String 函数是用来把数据转换成 string 类型的一个函数
+    log('string ', String(6.3))
+
+    var process = function(array, processor) {
+        /*
+        array 是一个数组
+        processor 是一个函数, 注意, 这是一个函数, 所以可以调用
+
+        把 array 中的每个元素都用 processor 函数处理并返回一个新的 list
+        */
+        var l = []
+        for (var i = 0; i < array.length; i++) {
+            var a = array[i]
+            // processor 必须能调用成功, 否则这里就跪了
+            var element = processor(a)
+            l.push(element)
+        }
+        return l
+    }
+
+    // 创建一个 array, 包含 3 个 number
+    var array = [1.1, -2.2, 3.3]
+
+    // String 内置函数
+    var stringList = process(array, String)
+    log('stringList', stringList)
+    var filter = function(array, processor) {
+        var l = []
+        for (var i = 0; i < array.length; i++) {
+            var a = array[i]
+            // processor 必须能调用成功, 否则这里就跪了
+            var condition = processor(a)
+            if (condition) {
+                l.push(a)
+            }
+        }
+        return l
+    }
+
+    filter([59, 12, 60, 100], function(n){
+        return n < 60
+    })
+
+
+
+
 
 
 
