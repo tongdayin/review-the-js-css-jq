@@ -78,3 +78,115 @@ var bindAll = function(selector, eventName, callback, responseClass) {
         })
     }
 }
+$('#id-button-add').on('click', function(event) {
+    var todo = $('#id-input-add').val()
+    $('#id-div-todo').append(todoTemplete(todo))
+})
+
+// jQuery 事件委托的方式
+$('#id-div-todo').on('click', '.delete-button', function(event){
+    console.log('click')
+
+    var button = $(event.target)
+    button.closest('.todo-cell').remove()
+})
+
+$('#id-div-todo').on('click', '.complete-button', function(event){
+    console.log('click 完成')
+    var button = $(event.target)
+    var span = button.closest('.todo-cell').find('span')
+    span.toggleClass('done')
+})
+
+$('#id-div-todo').on('click', '.edit-button', function(event){
+    console.log('click edit')
+    var button = $(event.target)
+    var span = button.closest('.todo-cell').find('span')
+    var t = span.text()
+    console.log('span.text', t)
+})
+var cells = $('.todo-cell')
+for (var i = 0; i < cells.length; i++) {
+    var c = cells[i]
+    console.log('cell', i, c)
+}
+// jQuery 提供遍历数组的 each 函数
+// 对每个元素调用函数, 参数是 index 和 element
+$('.todo-cell').each(function(i, e) {
+    console.log(i, e)
+})
+
+// map 操作
+// map 就是以前上课讲过的 process 函数
+// 对每个数组中的元素调用函数得到返回值组成新的数组
+var foo = ['你好','您好','拟吼']
+var bar = $.map(foo, function(value){
+    var ti =
+    `
+    <button type="button" name="button">${value}</button>
+    `
+    return $('body').append(ti)
+})
+bar
+
+// grep 相当于 filter 函数, 以前上课写过的
+var far = $.grep(foo, function(value){
+    return value % 2 == 0
+})
+
+/*
+data数据获取方式
+dom API 如下
+var domDiv = $('.todo-cell')[0]
+domDiv.dataset.id
+"401"
+
+jQuery API 如下
+var jqdiv = $($('.todo-cell')[0])
+jqdiv.data('id')
+*/
+按照功能, jQuery 常见的用法划分如下
+*/
+// a. 选择器
+// 1. $
+// 2. find
+// 3. siblings
+// 4. closest, parent
+// $('body')
+// $('#id-button-add')
+// $('.cell')
+//
+//
+// b. dom 操作
+// 1. append
+// 2. remove
+// 3. empty
+// 4. show, hide, toggle
+//
+//
+// c. class 操作
+// 1. addClass removeClass
+// 2. toggleClass
+//
+//
+// d. 属性、特性操作
+// 1. attr, prop, data
+// 2. removeAttr
+//
+//
+// e. 取值
+// 1. val
+// 2. text
+// 3. html
+//
+//
+// f. 事件
+// 1. on
+// 2. change
+// 3. event.target
+//
+//
+// g. 数组方法
+// 1. each
+// 2. map
+// 3. grep
