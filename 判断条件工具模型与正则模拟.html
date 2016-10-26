@@ -321,6 +321,573 @@
     filter([59, 12, 60, 100], function(n){
         return n < 60
     })
+    //符号运算
+    var product = function(array) {
+        // 先设置一个变量用来存 乘积
+        var s = 1
+        // 遍历数组
+        for(var i = 0; i < array.length; i++) {
+            // 用变量 n 保存元素值
+            var n = array[i]
+            // 累乘到变量 s
+            s = s * n
+            // 缩写是如下形式
+            // s *= n
+        }
+        // 循环结束, 现在 s 里面存的是数组中所有元素的乘了
+      	return s
+    }
+    var average = function(array) {
+        var n = array.length
+        return sum(array) / n
+    }
+    var min = function(array) {
+        var m = array[0]
+        for(var i = 0; i < array.length; i++) {
+            var n = array[i]
+            // 如果 n 更小, 设置 m 为 n
+            // 循环结束后 m 就是最小值
+            if (m > n) {
+                m = n
+            }
+        }
+        return m
+    }
+    var sum1 = function(n) {
+        // 观察规律发现是奇数想加偶数相减
+        var s = 0
+        // 注意 i 是 1 到 n
+        for (var i = 1; i <= n; i++) {
+            if (i % 2 == 0) {
+                sum -= i
+            } else {
+                sum += i
+            }
+        }
+        return s
+    }
+    //四则运算
+    var apply = function(op, a, b) {
+        if(op == '+') {
+            return a + b
+        }
+        if(op == '-') {
+            return a - b
+        }
+        if(op == '*') {
+            return a * b
+        }
+        if(op == '/') {
+            return a / b
+        }
+    }
+    //连续单一符号运算
+    var applyList = function(op, oprands) {
+        var result = oprands[0]
+        for (var i = 1; i < oprands.length; i++) {
+            var n = oprands[i]
+            // 累加到 result
+            result = apply(op, result, n)
+        }
+        return result
+    }
+    //输入字符串,进行数字比较
+    var applyCompare = function(expression) {
+        var op = expression[0]
+        var a = expression[1]
+        var b = expression[2]
+        if (op == '<') {
+            return a < b
+        }
+        if (op == '>') {
+            return a > b
+        }
+        if (op == '==') {
+            return a == b
+        }
+    }.
+
+    // 字符串的处理
+    //字符串补全
+    var nChar = function(char, n) {
+        var s = ''
+        for (var i = 0; i < n; i++) {
+            s += char
+        }
+        return s
+    }
+    var zfill = function(n, width) {
+        /*
+        n 是 int 类型
+        width 是 int 类型
+
+        把 n 的位数变成 width 这么长，并在右对齐，不足部分用 0 补足并返回
+        具体请看测试, 注意, 返回的是 string 类型
+
+        返回 string 类型
+        */
+        var s = String(n)
+        var len = s.length
+        return nChar('0', width - len) + s
+    }
+    var ljust = function(s, width, fillchar=' ') {
+        /*
+        s 是 string
+        width 是 int
+        fillchar 是 长度为 1 的字符串, 默认为空格 ' '
+
+        如果 s 长度小于 width, 则在末尾用 fillchar 填充并返回
+        否则, 原样返回, 不做额外处理
+
+        返回 string 类型
+        */
+        var len = width - s.length
+        return s + nChar(fillchar, len)
+    }
+    var rjust = function(s, width, fillchar=' ') {
+        /*
+        s 是 string
+        width 是 int
+        fillchar 是 长度为 1 的字符串, 默认为空格 ' '
+
+        如果 s 长度小于 width, 则在开头用 fillchar 填充并返回
+
+        返回 string 类型
+        */
+        var len = width - s.length
+        return nChar(fillchar, len) + s
+    }
+    var center = function(s, width, fillchar=' ') {
+        /*
+        s 是 string
+        width 是 int
+        fillchar 是 长度为 1 的字符串, 默认为空格 ' '
+
+        如果 s 长度小于 width, 则在两边用 fillchar 填充并返回
+        如果 s.length 和 width 互为奇偶, 则无法平均分配两边的 fillchar
+        这种情况下, 让左边的 fillchar 数量小于右边
+
+        返回 string 类型
+        */
+        var len = width - s.length
+        var lenLeft = Math.floor(len / 2)
+        var lenRight = len - lenLeft
+        var left = nChar(fillchar, lenLeft)
+        var right = nChar(fillchar, lenRight)
+        return left + s + right
+    }
+    // 字符串检查
+    var is_space = function(s) {
+        /*
+        s 是 string
+        检查 s 中是否只包含空格
+
+        返回 bool, 如果 s 中包含的只有空格则返回 true, 否则返回 false
+        */
+        for (var i = 0; i < s.length; i++) {
+            var char = s[i]
+            if (char != ' ') {
+                return false
+            }
+        }
+        return true
+    }
+    var is_digit = function(s) {
+        /*
+        s 是字符串
+        检查 s 中是否只包含数字
+        返回: bool, 如果 s 中包含的只有数字则返回 true, 否则返回 false
+        */
+        var digits = '1234567890'
+        for (var i = 0; i < s.length; i++) {
+            var char = s[i]
+            if (!digits.includes(char)) {
+                return false
+            }
+        }
+        return true
+    }
+    // 字符串筛分
+    var strip_left = function(s) {
+        /*
+        s 是 string
+        返回一个「删除了字符串开始的所有空格」的字符串
+
+        返回 string
+        */
+        var index = 0
+        for (var i = 0; i < s.length; i++) {
+            var char = s[i]
+            if (char != ' ') {
+                index = i
+                break
+            }
+        }
+        return s.slice(index)
+    }
+    var strip_right = function(s) {
+        /*
+        s 是 string
+        返回一个「删除了字符串末尾的所有空格」的字符串
+
+        返回 string
+        */
+        var index = s.length
+        for (var i = s.length - 1; i >= 0; i++) {
+            var char = s[i]
+            if (char != ' ') {
+                index = i
+                break
+            }
+        }
+        return s.slice(0, index)
+    }
+    ar strip = function(s) {
+        /*
+        s 是 string
+        返回一个「删除了字符串首尾的所有空格」的字符串
+
+        返回 string
+        */
+        s = strip_left(s)
+        s = strip_right(s)
+        return s
+    }
+    var startsWith = function(s1, s2) {
+        /*
+        s1 是一个字符串
+        s2 是一个字符串
+        检查 s1 是否以 s2 开头, 返回 true 或者 false
+        */
+        var len = s2.length
+        // 用 slice 切出一个和 s2 一样长度的字符串
+        // 然后比较
+        // slice 是不会出错的函数
+        return s1.slice(0, len) === s2
+    }
+    var findAllString = function(s1, s2) {
+        /*
+        s1 是一个字符串
+        s2 是一个字符串, 长度未知, 不一定为 1
+        返回参数 s2 在 s1 中出现的下标组成的 array
+        如果 s2 没有在 s1 中出现, 返回 []
+        */
+        // 创建一个空数组用来保存所有下标
+        var indices = []
+        // 遍历 s1
+        for (var i = 0; i < s1.length; i++) {
+            // slice 出一个字符串
+            // 然后用 startsWith 判断
+            var s = s1.slice(i)
+            if (startsWith(s, s2)) {
+                indices.push(i)
+            }
+        }
+        return indices
+    }
+    var endsWith = function(s1, s2) {
+        /*
+        s1 是一个字符串
+        s2 是一个字符串
+        检查 s1 是否以 s2 结尾, 返回 true 或者 false
+        */
+        var len1 = s1.length
+        var len2 = s2.length
+        // 尝试用 slice 切一个和 s2 等长的字符串判断是否和 s2 相等
+        // slice 不会出错, 即便给的是一个负值的下标
+        var s = s1.slice(len1-len2)
+        return s === s2
+    }
+    var top = function(students) {
+        /*
+        students 是 array
+        里面的每个元素都是如下格式的 object
+        {
+            'name': 'gua',
+            'sex': '男',
+            'score': 127,
+        }
+        返回 score 最高的那个元素(object)
+        */
+        // 和以前的老作业 max 函数一样的思路
+        var high = students[0]
+        for (var i = 0; i < students.length; i++) {
+            var s = students[i]
+            if (high.score < s.score) {
+                high = s
+            }
+        }
+        return high
+    }
+    // 辅助函数, 用来返回 array 中的字符串的最大长度
+    var maxLength = function(array) {
+        var max = array[0].length
+        for (var i = 0; i < array.length; i++) {
+            var s = array[i]
+            if (max < s.length) {
+                max = s.length
+            }
+        }
+        return max
+    }
+    var prettyLog = function(array) {
+        /*
+        array 是 array 类型, 里面的元素都是字符串
+
+        按如下的格式返回这个 array
+        假设 array 是 ['python', 'js', 'objective-c']
+        那么返回的数据是一个数组, 多了首尾两个元素
+        [
+            '+++++++++++++++',
+            '+ python      +',
+            '+ js          +',
+            '+ objective-c +',
+            '+++++++++++++++',
+        ]
+        返回包含了 string 的 array
+        */
+        var len = maxLength(array)
+        var head = nChar(len + 4, '+')
+        // 创建空数组
+        var l = []
+        // push 头
+        l.push(head)
+        // 循环拼接
+        for (var i = 0; i < array.length; i++) {
+            var s = array[i]
+            // 得到每行的空格
+            var space = nChar(len - s.length, ' ')
+            // 每行的内容
+            var content = s + space
+            // 得到每行的完整字符串
+            var line = `+ ${content} +`
+            l.push(line)
+        }
+        // push 最后一行
+        l.push(head)
+        return l
+    }
+    var join = function(delimiter, array) {
+        /*
+        delimiter 是 string
+        array 是包含 string 的 array
+
+        把 array 中的元素用 delimiter 连接成一个字符串并返回
+        具体请看测试
+        */
+        var s = array[0]
+        for (var i = 1; i < array.length; i++) {
+            var a = array[i]
+            s += (delimiter + a)
+        }
+        return s
+    }
+    // 下面的函数浏览器已经自带
+    var split = function(s, delimiter=' ') {
+        /*
+        s 是 string
+        delimiter 是 string, 默认为空格 ' '
+
+        以 delimiter 为分隔符号, 返回一个 array
+        例如
+        split('1 2 3') 返回 ['1', '2', '3']
+        split('a=b&c=d', '&') 返回 ['a=b', 'c=d']
+        注意, 测试 array 是否相等得自己写一个函数用循环来跑
+        */
+
+        var l = []
+        // space 是分隔符的长度, 因为分隔符不一定长度为 1
+        var space = delimiter.length
+        // start 用来存储每次的开始下标
+        var start = 0
+        for(var i = 0; i < s.length; i++) {
+            // 检查分隔符
+            if(s.slice(i, i+space) === delimiter) {
+                // 如果检查到了, 就存储一个数据
+                l.push(s.slice(start, i))
+                // 设置新的开始下标
+                start = i + space
+            }
+        }
+        // 把最后一个元素添加进去
+        l.push(s.slice(start))
+        return l
+    }
+    var replaceAll = function(s, old, newString) {
+        /*
+        s old newString 都是 string
+        返回一个「将 s 中出现的所有 old 字符串替换为 new 字符串」的字符串
+        */
+        // 很简单, 对吧?
+        var s1 = split(s, old)
+        var s2 = join(newString, s1)
+        return s2
+    }.
+
+    //随机坐标
+
+    var randomSquare09 = function(n, limit=3) {
+        /*
+        返回以下格式的数据
+        只包含 0 和 9
+        limit 是 9 的个数
+        假设 n 为 4, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
+        注意, 这只是一个 array, 并不是它显示的样子
+        注意, 这是一个 array 不是 string
+        [
+            [0, 9, 0, 0],
+            [0, 0, 9, 0],
+            [9, 0, 0, 0],
+            [0, 0, 0, 0],
+        ]
+        返回, 包含了 n 个『只包含 n 个「随机 0 9」的 array』的 array, 9 的个数是 limit
+        */
+        var square = emptySquare(n)
+        // 随机出 limit 个坐标, 并且处理好重合的情况
+        for (var i = 0; i < limit; i++) {
+            var x = random(n)
+            var y = random(n)
+            // 如果随机到的坐标是 0, 就设置为 9
+            if (square[x][y] === 0) {
+                square[x][y] = 9
+            } else {
+                // 否则什么都不做, 并且 i--
+                // 因为要跳过此次循环
+                i--
+            }
+        }
+        return square
+    }
+    //随机值
+    ar sum = function(a){
+        var s = 0
+        for (var i = 0; i < a.length; i++) {
+            for (var j = 0; j < a.length; j++) {
+                s += a[i][j]
+            }
+
+        }
+        return s
+    }
+    sum(a)
+    var randomSquare009 = function(n,m){
+        var array = []
+        for (var i = 0; i < n; i++) {
+            array.push(randomLine09(n))
+        }
+        return array
+    }
+    randomSquare009 (5)
+    var randomSquare09 =function (n,m){
+        var a = randomSquare009(n)
+        var s = JSON.stringify(a)
+        var aa = JSON.parse(s)
+        log (a,s,aa)
+        condition = z9(sum(aa)) == m
+        log(z9(sum(aa)),condition,m)
+        if (condition) {
+            return aa
+        }else {
+            return randomSquare09(n,m)
+        }
+
+    }
+
+    //不重复
+    var unique = function(a) {
+        /*
+        a 是一个 array
+    	返回一个 array, 包含了 a 中所有元素, 且不包含重复元素
+        例如 a 是 [1, 2, 3, 1, 3, 5]
+        返回 [1, 2, 3, 5]
+        */
+        var l = []
+        for (var i = 0; i < a.length; i++) {
+            var element = a[i]
+            if (!l.includes(element)) {
+                l.push(element)
+            }
+        }
+        return l
+    }
+    var intersection = function(a, b) {
+        /*
+        a b 都是 array
+
+        返回一个 array, 里面的元素是同时出现在 a b 中的元素
+        这个 array 中不包含重复元素
+        */
+        var l = []
+        for (var i = 0; i < a.length; i++) {
+            var element = a[i]
+            if (b.includes(element)) {
+                l.push(element)
+            }
+        }
+        return l
+    }
+    var union = function(a, b) {
+        /*/
+        a b 都是 array
+
+        返回一个 array, 里面的元素是所有出现在 a b 中的元素
+        这个 array 中不包含重复元素
+        /*/
+        // 把 b 所有元素放入 l
+        var l = b.slice(0)
+        // 再把 a 添加进 l
+        for (var i = 0; i < a.length; i++) {
+            var e = a[i]
+            l.push(e)
+        }
+        // 调用 unique 返回
+        return unique(l)
+    }
+    ar difference = function(a, b) {
+        /*/
+        a b 都是 array
+
+        返回一个 array, 里面的元素是
+        所有在 a 中有 b 中没有的元素
+        这个 array 中不包含重复元素
+        /*/
+        var l = []
+        for (var i = 0; i < a.length; i++) {
+            var e = a[i]
+            if (!b.includes(e)) {
+                l.push(e)
+            }
+        }
+        return unique(l)
+    }
+    var differenceAll = function(a, b) {
+        /*/
+        a b 都是 array
+
+        返回一个 array, 里面的元素是
+        所有在 a b 中的非公共元素
+        这个 array 中不包含重复元素
+        /*/
+        var d1 = difference(a, b)
+        var d2 = difference(b, a)
+        return union(d1, d2)
+    }
+    var isSubset = function(a, b) {
+        /*/
+        a b 都是 array
+
+    	检查是否 a 中的每个元素都在 b 中出现
+        返回 bool
+        /*/
+        // 取交集
+        var l = intersection(a, b)
+        // 检查 l a 长度是否一样
+        return l.length === a.length
+    }
+
+
+
+
 
 
 
